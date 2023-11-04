@@ -22,9 +22,8 @@ while IS_RUNNING:
     for event in events:
         if event.type == pygame.QUIT:
             IS_RUNNING = False
-    
+
     scene_manager.run(events)
 
     clock.tick(FPS)
     pygame.display.update()
-    
