@@ -13,7 +13,5 @@ GAME_STATE = 1
 DEATH_STATE = 2
 WIN_STATE = 3
 
-CURRENT_STATE = MENU_STATE
-
 font.init()
 FONT = font.Font('freesansbold.ttf', 32)
