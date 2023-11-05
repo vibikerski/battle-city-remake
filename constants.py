@@ -6,6 +6,7 @@ SCREEN_HEIGHT = 600
 FPS = 60
 
 PATH = os.path.dirname(__file__) + os.path.sep
+IMG_PATH = PATH + "img/"
 
 # Коди сцен гри
 MENU_STATE = 0

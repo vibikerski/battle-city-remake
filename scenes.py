@@ -1,6 +1,6 @@
-from settings import *
+from constants import *
 from abc import ABC, abstractmethod
-import pygame.locals as keys  # для input_handle
+import pygame.locals as pygame_inputs  # для input_handle
 
 
 # абстрактний клас з методами кожної сцени
@@ -39,9 +39,9 @@ class Menu(Scene):
     def update(self):
         pass
 
-    def handle_events(self, events):
+    def handle_events(self, events, keys):
         for event in events:
-            if event.type == keys.MOUSEBUTTONDOWN:
+            if event.type == pygame_inputs.MOUSEBUTTONDOWN:
                 self.start_game()
 
     def start_game(self):
@@ -62,7 +62,7 @@ class Game(Scene):
     def update(self):
         pass
 
-    def handle_events(self, events):
+    def handle_events(self, events, keys):
         pass
 
 

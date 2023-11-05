@@ -13,9 +13,9 @@ class SceneManager:
         elif scene_code in self.scenes:
             self.next_scene = scene_code
 
-    def run(self, events):
+    def run(self, events, keys):
         active_scene = self.scenes[self.current_scene]
-        active_scene.handle_events(events)
+        active_scene.handle_events(events, keys)
         active_scene.update()
         active_scene.render()
 

@@ -1,5 +1,5 @@
 import pygame
-from settings import *
+from constants import *
 from scenes import *
 from scenemanager import *
 from scenebuilder import *
@@ -22,8 +22,10 @@ while IS_RUNNING:
     for event in events:
         if event.type == pygame.QUIT:
             IS_RUNNING = False
+    
+    keys = pygame.key.get_pressed()
 
-    scene_manager.run(events)
+    scene_manager.run(events, keys)
 
     clock.tick(FPS)
     pygame.display.update()
