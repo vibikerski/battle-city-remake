@@ -2,6 +2,7 @@ from constants import *
 from abc import ABC, abstractmethod
 import pygame.locals as pygame_inputs  # для input_handle
 from hero import *
+from maps import *
 
 
 # абстрактний клас з методами кожної сцени
@@ -22,14 +23,14 @@ class Scene(ABC):
 # головне меню гри
 class Menu(Scene):
     def __init__(self, screen, manager, builder):
-        self.bg_colour = (34, 28, 51)
+        self.bg = GameSprite(screen, 'mainbackground.jpg', 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)
         self.text_colour = (212, 36, 36)
         self.screen = screen  # з main.py
         self.manager = manager  # для керування зміною сцени
         self.builder = builder  # для створення сцени Game
 
     def render(self):
-        self.screen.fill(self.bg_colour)  # замінити фоновою картинкою
+        self.bg.render()
 
         text = FONT.render("BATTLE CITY (remake)", True, self.text_colour)
         textRect = text.get_rect()
@@ -53,50 +54,50 @@ class Menu(Scene):
 
 class Game(Scene):
     def __init__(self, screen, manager):
-        self.bg_colour = (34, 28, 51)
+        self.map = Map(screen, 'background.jpg')
         self.screen = screen
         self.manager = manager
-        self.main_character = Hero(self.screen, IMG_PATH + 'hero.png', 100, 100, 100, 100)
+        self.player = self.map.player
+        self.enemies = self.map.enemies
+        self.walls = self.map.walls
 
     def render(self):
-        self.screen.fill(self.bg_colour)
-        self.main_character.render()
-       
+        self.map.render_background()
+        self.player.render()
+        for enemy in self.enemies:
+            enemy.render()
+        for wall in self.walls:
+            wall.render()
 
     def update(self):
         pass
 
     def handle_events(self, events, keys):
-        self.main_character.move(keys)
-
-    # def generate_world(self):
-    #     for y
-    #         for x
-    #             if block == 'p':
-    #                 self.main_character = MainTank(IMG_PATH + 'hero.png', x, y)
-    #             self.block.append
+        self.player.move(keys)
 
 
 class Death(Scene):
-    def __init__(self):
-        pass
+    def __init__(self, screen):
+        self.screen = screen
+        self.bg = GameSprite(screen, 'lossbackground.jpg', 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)
 
     def render(self):
-        pass
+        self.bg.render()
 
     def update(self):
         pass
 
-    def handle_events(self, events):
+    def handle_events(self, events, keys):
         pass
 
 
 class Win(Scene):
-    def __init__(self):
-        pass
+    def __init__(self, screen):
+        self.screen = screen
+        self.bg = GameSprite(screen, 'victorybackground.jpg', 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)
 
     def render(self):
-        pass
+        self.bg.render()
 
     def update(self):
         pass
