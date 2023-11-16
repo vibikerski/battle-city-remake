@@ -47,37 +47,45 @@ class Menu(Scene):
                 self.start_game()
 
     def start_game(self):
-        game = self.builder.create_scene(GAME_STATE, self.screen, self.manager)
+        game = self.builder.create_scene(GAME_STATE, self.screen, self.manager, self.builder)
         self.manager.add_scene(GAME_STATE, game)
         self.manager.set_scene(GAME_STATE)
 
 
 class Game(Scene):
-    def __init__(self, screen, manager):
+    def __init__(self, screen, manager, builder):
         self.map = Map(screen, 'background.jpg')
         self.screen = screen
         self.manager = manager
+        self.builder = builder
         self.player = self.map.player
         self.enemies = self.map.enemies
         self.walls = self.map.walls
 
     def render(self):
         self.map.render_background()
-        self.player.render()
-        for enemy in self.enemies:
-            enemy.render()
         for wall in self.walls:
             wall.render()
+        for enemy in self.enemies:
+            state = enemy.run(self.player)
+            if state == 'Lost':
+                self.lose()
+        self.player.render()
 
     def update(self):
-        pass
+        self.map.update()
 
     def handle_events(self, events, keys):
         self.player.move(keys)
+    
+    def lose(self):
+        death = self.builder.create_scene(DEATH_STATE, self.screen, self.manager)
+        self.manager.add_scene(DEATH_STATE, death)
+        self.manager.set_scene(DEATH_STATE)
 
 
 class Death(Scene):
-    def __init__(self, screen):
+    def __init__(self, screen, manager):
         self.screen = screen
         self.bg = GameSprite(screen, 'lossbackground.jpg', 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)
 

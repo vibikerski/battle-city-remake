@@ -9,4 +9,12 @@ class Enemy(CollidingObject):
         
     def shoot(self):
         pass
+    
+    def run(self, player):
+        self.render()
+        return self.update(player)
+    
+    def update(self, player):
+        if self.collide(player):
+            return 'Lost'
         

@@ -22,7 +22,6 @@ while IS_RUNNING:
     for event in events:
         if event.type == pygame.QUIT:
             IS_RUNNING = False
-    
     keys = pygame.key.get_pressed()
 
     scene_manager.run(events, keys)
