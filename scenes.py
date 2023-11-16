@@ -1,6 +1,7 @@
 from constants import *
 from abc import ABC, abstractmethod
 import pygame.locals as pygame_inputs  # для input_handle
+from hero import *
 
 
 # абстрактний клас з методами кожної сцени
@@ -55,15 +56,25 @@ class Game(Scene):
         self.bg_colour = (34, 28, 51)
         self.screen = screen
         self.manager = manager
+        self.main_character = Hero(self.screen, IMG_PATH + 'hero.png', 100, 100, 100, 100)
 
     def render(self):
         self.screen.fill(self.bg_colour)
+        self.main_character.render()
+       
 
     def update(self):
         pass
 
     def handle_events(self, events, keys):
-        pass
+        self.main_character.move(keys)
+
+    # def generate_world(self):
+    #     for y
+    #         for x
+    #             if block == 'p':
+    #                 self.main_character = MainTank(IMG_PATH + 'hero.png', x, y)
+    #             self.block.append
 
 
 class Death(Scene):

@@ -16,3 +16,8 @@ WIN_STATE = 3
 
 font.init()
 FONT = font.Font('freesansbold.ttf', 32)
+
+
+SPEED_MIN = 3
+SPEED_MID = 5
+SPEED_MAX = 10
