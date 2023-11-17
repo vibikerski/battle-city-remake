@@ -64,7 +64,7 @@ class MapGenerator:
                 pos_x = (SCREEN_WIDTH * x) // len(Map.game_map[0])
                 pos_y = (SCREEN_HEIGHT * y) // len(Map.game_map)
                 if Map.game_map[y][x] == "w":
-                    walls.append(CollidingObject(screen, 'stone.png', pos_x, pos_y, 100, 100))
+                    walls.append(CollidingObject(screen, 'block.png', pos_x, pos_y, 100, 100))
                 elif Map.game_map[y][x] == 'e':
                     enemies.append(Enemy(screen, 'enemy.png', pos_x, pos_y, 100, 100))
                 elif Map.game_map[y][x] == 'e1':
